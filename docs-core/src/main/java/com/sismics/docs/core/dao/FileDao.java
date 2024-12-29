@@ -158,7 +158,11 @@ public class FileDao {
         // Update the file
         fileDb.setDocumentId(file.getDocumentId());
         fileDb.setName(file.getName());
-        fileDb.setContent(file.getContent());
+        if (file.getContent() != null) {
+            fileDb.setContent(file.getContent().replace("\u0000", ""));
+        } else {
+            fileDb.setContent(null);
+        }
         fileDb.setOrder(file.getOrder());
         fileDb.setMimeType(file.getMimeType());
         fileDb.setVersionId(file.getVersionId());
