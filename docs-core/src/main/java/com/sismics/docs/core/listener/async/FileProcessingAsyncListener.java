@@ -176,6 +176,9 @@ public class FileProcessingAsyncListener {
         log.info("Start extracting content from: " + file);
         try {
             content = formatHandler.extractContent(event.getLanguage(), event.getUnencryptedFile());
+            if (content != null) {
+                content = content.replace("\u0000", "");
+            }
         } catch (Throwable e) {
             log.error("Error extracting content from: " + file, e);
         }
